@@ -33,10 +33,11 @@ question and fun analysis.
 ##Introduction
 
 *Clostridium difficile* is an anaerobic spore forming bacterium that is respobsible for 14,000 deaths and 1 billion dollars in excess healthcare costs annually in the US.(1)  *C. diff* infection (CDI) is primarily healthcare associated, and infected individuals can experience symptoms ranging from asymptomatic colonization, to toxic megacolon requiring colectomy. Protection from CDI is thought to occur through interactions between bacteria in the gut as well as via the adaptive immune response.
+The Young lab has a mouse model of CDI which Jhansi used to study the imact of adaptive immunity and pre-colonization by a less virulent strain on infection outcomes (Figure 1 poster below). Briefly, in this model, mice are given cefoperazone for ten days to perturb their indigenous microbiota. They are then treated with either water or a non-lethal *C. diff* strain. Both groups are mice are then given clindamycin for 6 weeks along with a non-lethal strain of *C. diff*. After six weeks mice in each treatment group are challanged with a lethal *C diff* strain and outcomes are measured.  
 
+I am replicating Jhansi's colonization data analysis and graphs for this project.
 
-
-I am replicating Jhansi's data analysis and graphs for this project.
+Jhansi's Anaerobe 2014 Poster: ![](Anaerobe2014_posterLESLIE.pdf)
 
 ##Methods
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information.   
