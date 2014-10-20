@@ -39,9 +39,9 @@ I am replicating Jhansi's colonization data analysis and graphs for this project
 
 ###Jhansi's Anaerobe 2014 Poster: ![](/Users/shawnwhitefield/Desktop/r_class/project_1/Anaerobe2014_posterLESLIE_copy.jpg)
 
-##Methods
+##Methods & Results
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information. 
-###Example 1: Initial Mouse weight excel spreadsheet ![](/Users/shawnwhitefield/Desktop/example_1_copy.jpg)
+###Example 1: Initial Mouse Weight Excel Spreadsheet ![](/Users/shawnwhitefield/Desktop/example_1_copy.jpg)
 
 ```{r}
 #reading in new datafile
@@ -50,9 +50,21 @@ mouseweights<-read.table(file="cleaned-up_mouse_weights.txt", header=T)
 summary(mouseweights)
 
 ```
+The next step is to use this data to replicate Figure 5. 
+```{r}
+
+```
+Jhansi also looked at the effect of the adaptive immune system on *C diff* infection. She infected mice with *C diff* strain 630, compared the level of colonization of wildtype vs. RAG knockout mice over time. RAG knockout mice have no mature B and T lymphocytes, so they are severly immuno defficient. 
+
+This data was also in an excel spreadsheet, so similar to above, I reformatted the data before bringing it in to R. 
+###Example 2: CFU by Genotype Data
+![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
+```{r}
+
+```
 
 
-##Results
+
 ##Discussion
 ##Sources
 1. [CDC.gov *C. diff*](http://www.cdc.gov/HAI/organisms/cdiff/Cdiff_infect.html)
