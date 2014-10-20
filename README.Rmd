@@ -54,11 +54,17 @@ The next step is to use this data to replicate Figure 5.
 ```{r}
 
 ```
-Jhansi also looked at the effect of the adaptive immune system on *C diff* infection. She infected mice with *C diff* strain 630, compared the level of colonization of wildtype vs. RAG knockout mice over time. RAG knockout mice have no mature B and T lymphocytes, so they are severly immuno defficient. 
+Jhansi also looked at the effect of the adaptive immune system on *C. diff* infection. She infected mice with *C. diff* strain 630, and compared the level of colonization of wildtype vs. RAG knockout mice over time. RAG knockout mice have no mature B and T lymphocytes, so they are severly immuno defficient. 
 
 This data was also in an excel spreadsheet, so similar to above, I reformatted the data before bringing it in to R. 
 ###Example 2: CFU by Genotype Data
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
+```{r}
+#reading in CFU datafile
+mousecfu<-read.table(file="cleaned_up_CFU_mouse_data.txt", header=T)
+summary(mousecfu)
+```
+Here is my replication of figure 8:
 ```{r}
 
 ```
