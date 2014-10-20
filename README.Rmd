@@ -43,6 +43,13 @@ I am replicating Jhansi's colonization data analysis and graphs for this project
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information. 
 ###Example 1: Initial Mouse weight excel spreadsheet ![](/Users/shawnwhitefield/Desktop/example_1_copy.jpg)
 
+```{r}
+#reading in new datafile
+mouseweights<-read.table(file="cleaned-up_mouse_weights.txt", header=T)
+#getting summary to verify all variables are imported correctly
+summary(mouseweights)
+
+```
 
 
 ##Results
