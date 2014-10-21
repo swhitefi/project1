@@ -67,7 +67,7 @@ This figure demonstrates that mice that are infected by a less virulent strain a
 
 This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easier to understand. 
 ```{r}
-#create box plot with individual dots as RAG mice
+#create strip chart with individual dots as RAG mice
 par(mar=c(6,6,4,4), xpd=T)
 stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1)
 #adding WT mice
@@ -82,7 +82,14 @@ summarystats<-function(x) {
 }
 sumstatsweight<-tapply(mousecfu$pBLweight, mousecfu$infection_status, summarystats)
 sumstatsweight  
-#calculating mean of each infection status
+#adding median lines to plot
+
+
+qcontrol<-points(84.51,87.63)
+qcolonized<-points(98.97, 104.09)
+qcleared<-points(89.62,92.30)
+
+
 
 #do t tests comparing naive vs cleared
 #do t test comparing colonized and cleared
