@@ -43,24 +43,29 @@ I am replicating Jhansi's colonization data analysis and graph for this project.
 Jhansi looked at the effect of the adaptive immune system on *C. diff* infection. She infected mice with *C. diff* strain 630, and compared the level of colonization of wildtype vs. RAG knockout mice, which have no mature B and T lymphocytes, over time.  
 
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information.
-###Example 2: CFU by Genotype Data
+###Example 1: CFU by Genotype Data 
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
 ```{r}
 #reading in CFU datafile
 mousecfu<-read.table(file="cleaned_up_CFU_mouse_data.txt", header=T)
 summary(mousecfu)
-#now I need to reshape my dataframe 
+#reading in weights datafile
 
 
 
 
 ```
-Here is my replication of figure 8:
+###Figure 8 replication
+figure 8 clearly demonstrates that adaptive immunity does not play a role in *C. diff* infection clearance, and that pre-colonization with a less virulent strain is protective against infection with a lethal strain. 
 ```{r}
 
 ```
+###Figure 9 discussion and data visualization improvements
+In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previous 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
 
+This figure demonstrates that mice that are infected by a less virulent strain at the time of infection are protected from CDI illness once infected by a lethal strain, and that adaptive immunity does not modify this effect.
 
+This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easy to understand. 
 
 ##Discussion
 ##Sources
