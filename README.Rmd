@@ -49,8 +49,7 @@ The data was stored in a large multi-sheet Excel document, so the first step was
 #reading in cfu and weights datafile
 mousecfu<-read.table(file="cleaned-up_mouse_data.txt", header=T)
 summary(mousecfu)
-#reading in mean cfu datafile
-meanmousecfu<-read.table(file="")
+
 
 ```
 ###Figure 8 replication
@@ -68,13 +67,17 @@ This figure demonstrates that mice that are infected by a less virulent strain a
 
 This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easier to understand. 
 ```{r}
-#create box plot with individual dots as mice
-stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", ylab="Percent of baseline weight", xlab="Colonization Status Prior to VPI Infection")
-stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", ylab="Percent of baseline weight", xlab="Colonization Status Prior to VPI Infection", add=T)
+#create box plot with individual dots as RAG mice
+par(mar=c(6,6,4,4), xpd=T)
+stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1)
+#adding WT mice
+stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", add=T)
+#adding legend
 
+legend("bottom", c("RAG","WT"), pch=1, col=c("green","blue"),horiz=T, xpd=T, bty="n", cex=1, inset=c(0,1))
 
-
-points(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], col="blue", pch=c(1))
+#adding mean and IQR
+#calculating mean of each infection status
 
 #do t tests comparing naive vs cleared
 #do t test comparing colonized and cleared
