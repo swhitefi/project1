@@ -46,7 +46,7 @@ The data was stored in a large multi-sheet Excel document, so the first step was
 ###Example 1: CFU by Genotype Data 
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
 ```{r}
-#reading in CFU datafile
+#reading in cfu and weights datafile
 mousecfu<-read.table(file="cleaned_up_CFU_mouse_data.txt", header=T)
 summary(mousecfu)
 #reading in weights datafile
@@ -58,14 +58,24 @@ summary(mousecfu)
 ###Figure 8 replication
 figure 8 clearly demonstrates that adaptive immunity does not play a role in *C. diff* infection clearance, and that pre-colonization with a less virulent strain is protective against infection with a lethal strain. 
 ```{r}
-
+#create new dataframe for the mean cfu per cage on each day
+#create variable for SEM for error bars
+#create bar chart displaying dpi vs cfu with a line for each cage
 ```
 ###Figure 9 discussion and data visualization improvements
 In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previous 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
 
 This figure demonstrates that mice that are infected by a less virulent strain at the time of infection are protected from CDI illness once infected by a lethal strain, and that adaptive immunity does not modify this effect.
 
-This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easy to understand. 
+This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easier to understand. 
+```{r}
+#create box plot with individual dots as mice
+#do t tests comparing naive vs cleared
+#do t test comparing colonized and cleared
+#do t test comparing naive and colonized
+
+
+```
 
 ##Discussion
 ##Sources
