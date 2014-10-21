@@ -72,9 +72,18 @@ par(mar=c(6,6,4,4), xpd=T)
 stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1)
 #adding WT mice
 stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", add=T)
+#adding median lines to plot
+#median control
+points(85.847797,2.992193, col="black", pch=10)
+#median colonized
+points(1.991561,101.269055, col="red", pch=15)
+#median cleared
+points(1.002984,91.666667, col="black", pch=10)
+
 #adding legend
 
 legend("bottom", c("RAG","WT"), pch=1, col=c("green","blue"),horiz=T, xpd=T, bty="n", cex=1, inset=c(0,1))
+
 
 #writing function to find median mean and IQR of each pre VPI type
 summarystats<-function(x) {
@@ -83,9 +92,14 @@ summarystats<-function(x) {
 sumstatsweight<-tapply(mousecfu$pBLweight, mousecfu$infection_status, summarystats)
 sumstatsweight  
 #adding median lines to plot
+#median control
+points(85.847797,2.992193)
+#median colonized
+points(1.991561, 101.269055)
+#median cleared
+points(1.002984, 91.666667)
 
-
-qcontrol<-points(84.51,87.63)
+points(84.51,87.63)
 qcolonized<-points(98.97, 104.09)
 qcleared<-points(89.62,92.30)
 
