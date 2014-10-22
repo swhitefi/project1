@@ -33,34 +33,36 @@ question and fun analysis.
 ##Introduction
 
 *Clostridium difficile* is an anaerobic spore forming bacterium that is respobsible for 14,000 deaths and 1 billion dollars in excess healthcare costs annually in the US.(1)  *C. diff* infection (CDI) is primarily healthcare associated, and infected individuals can experience symptoms ranging from asymptomatic colonization, to toxic megacolon requiring colectomy. Protection from CDI is thought to occur through interactions between bacteria in the gut as well as via the adaptive immune response.
-The Young lab has a mouse model of CDI which Jhansi used to study the imact of adaptive immunity and pre-colonization by a less virulent strain on infection outcomes (Figure 1 poster below). Briefly, in this model, mice are given cefoperazone for ten days to perturb their indigenous microbiota. They are then treated with either water or a non-lethal *C. diff* strain. Both groups of mice are then given clindamycin for 6 weeks along with a non-lethal strain of *C. diff*. After six weeks mice in each treatment group are challanged with a lethal *C diff* strain and outcomes are measured.  
+The Young lab has a mouse model of CDI which Jhansi used to study the imact of adaptive immunity and pre-colonization by a less virulent strain on infection outcomes (Figure 1 poster below). Briefly, in this model, mice are given cefoperazone for ten days to perturb their indigenous microbiota. They are then treated with either water or a non-lethal *C. diff* strain. Both groups of mice are then given clindamycin. After six weeks mice in each treatment group are challanged with a lethal *C diff* strain and outcomes are measured.  
 
-I am replicating Jhansi's colonization data analysis and graph for this project.
+Jhansi Leslie, a graduate student in the Young lab, created this poster for a conference. There are some changes that could strengthen the presentation of her data. In this project, I am running statistical tests and creating new (and hopefully improved) data visualizations for parts of her mouse colonization data.
 
 ###Jhansi's Anaerobe 2014 Poster: ![](/Users/shawnwhitefield/Desktop/r_class/project_1/Anaerobe2014_posterLESLIE_copy.jpg)
 
 ##Methods & Results 
-Jhansi looked at the effect of the adaptive immune system on *C. diff* infection. She infected mice with *C. diff* strain 630, and compared the level of colonization of wildtype vs. RAG knockout mice, which have no mature B and T lymphocytes, over time.  
+Jhansi looked at the effect of the adaptive immune system on *C. diff* infection. She infected mice with *C. diff* strain 630, and compared the level of colonization of wildtype vs. RAG knockout mice (which have no mature B and T lymphocytes) over time.  
 
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information.
+
 ###Example 1: CFU by Genotype Data 
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
-```{r}
+```{r echo=FALSE}
+echo=FALSE
 #reading in cfu and weights datafile
 mousecfu<-read.table(file="cleaned-up_mouse_data.txt", header=T)
 summary(mousecfu)
-
-
 ```
-###Figure 8 
-The purpose of figure 8 is to demonstrate that adaptive immunity does not play a role in *C. diff* infection clearance. This figure shows the CFU (mean +/- the SEM) for each cage of RAG or WT mice over time after infection with *C. diff* strain 630 or mock infection. There are 6 total cages, each cage has between 4 and 8 mice, and cages house either WT or RAG mice. For these reasons, I think that displaying the mean colonization by cage takes away from the interpretation of this data. Visually it looks as though colonization is dependent on cage effects, which takes away from the fact that this is actually an effect of variation in the outcome of infection vs. mock infection. 
+###Figure 8. Discussion and Data Visualization Modifications
+The purpose of figure 8 is to demonstrate that adaptive immunity does not play a role in *C. diff* infection clearance. This figure shows the CFU (mean +/-SEM) for each cage of RAG or WT mice over time after infection with *C. diff* strain 630 or mock infection. There are 6 total cages, each cage has between 4 and 8 mice, and cages house either WT or RAG mice. 
 
-I think that the data could be expressed better as individual mice since the
-numbers are small.  Additionally separate symbols for mock infection and actual infection, and separate colors for each mouse genotype will allow easier and more clear interpretation of these data.
+These numbers are small, and I think that displaying the mean+/- SEM colonization by cage takes away from the interpretation of this data. Visually it looks as though colonization is dependent on cage effects.  This is likely true, but it is not important for the purpose of this figure. Displaying the data by cage takes the emphasis of the figure away from the main point, which is that there is variation in colonization outcomes that is consistent across RAG vs WT mice.   
 
-Additionally, a chi-square test could answer the question of weather clearance of infection depends on adaptive immunity, and strengthen the argument that it does not. 
+I think that the data would be expressed better as individual mice since the
+numbers are small.  Additionally separate symbols for RAG vs WT genotype visually demonstrate that these genotypes do not impact colonization. Furthermore, a distinction between mock and actual infection using a line at the limit of detection will allow easier and more clear interpretation of these data.
 
-```{r}
+Also, a chi-square test will provide a stronger argument that clearance of infection does not depend on adaptive immunity.  
+
+```{r echo=FALSE}
 #reshape data so a new variable called day takes on the value 1,4,7,16,22,31,40 for each mouse
 #add each wide variable day to a new variable called cfu corresponding with each day
 reshapecfu<-reshape(mousecfu, varying=c("CFUDay1",  "CFUDay4",	"CFUDay7",	"CFUDay10",	"CFUDay16",	"CFUDay22",	"CFUDay31",	"CFUDay40"), v.names="CFU", timevar="Day", times=c(1, 4, 7, 10, 16, 22, 31, 40), new.row.names=1:10000, direction="long")
@@ -70,11 +72,9 @@ sortedreshapecfu<-reshapecfu[order(Day),]
 detach(reshapecfu)      
 #create line graph of all mice by genotype
 par(mar=c(6,6,4,4), xpd=T)
-plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=15, log="y", main="RAG and WT 630 CFU/g Feces Over Time", xlab="Day", ylab="", las=1, cex=1, )
+plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=3, log="y", main="630 CFU/g Feces in RAG & WT Mice Over Time", xlab="Day", ylab="", las=1, cex=1, sub="ChiSquare RAG vs. WT Colonization Outcome p=.94")
 #adding WT mice
 points(sortedreshapecfu[sortedreshapecfu$genotype=="WT","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="WT","Day"], type="p", col="blue", pch=1)
-#adding control
-lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black", lwd=3)
 #connecting the mice
 #1
 lines(sortedreshapecfu[sortedreshapecfu$id=="1","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="1", "Day"], type="l", col="grey")
@@ -140,17 +140,28 @@ lines(sortedreshapecfu[sortedreshapecfu$id=="30","CFU"]~sortedreshapecfu[sortedr
 lines(sortedreshapecfu[sortedreshapecfu$id=="31","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="31", "Day"], type="l", col="grey")
 #32
 lines(sortedreshapecfu[sortedreshapecfu$id=="32","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="32", "Day"], type="l", col="grey")
+#adding control
+lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black", lwd=5)
 #adding legend
-legend("topright", c("RAG","WT"), pch=c(15,1), col=c("green","blue"), cex=1, bty="n")
+legend("topright", c("RAG","WT", "Mock"), pch=c(3,1,15), col=c("green","blue", "black"), cex=1, bty="n")
 #chi square test for infection outcome by genotype
+#reading in compressed table for equal variable lengths
+mouseinf_geno<-read.table(file="geno_infstatus.txt", header=T)
+ragchisq<-chisq.test(mouseinf_geno$infection_status, mouseinf_geno$genotype)
+ragchisq
+
 ```
-###Figure 9 discussion and data visualization improvements
-In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previous 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
+###Figure 9. Discussion and Data Visualization Modifications
+In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previously 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
 
 This figure demonstrates that mice that are infected by a less virulent strain at the time of infection are protected from CDI illness once infected by a lethal strain, and that adaptive immunity does not modify this effect.
 
-This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should loose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because the bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to not replicate this figure, but to create a figure that displays the data in a way that is easier to understand. 
-```{r}
+This figure was created in Prism and there are some issues with how the data is displayed that detract from its impact.  Frist, healthy mice should lose the least amount of weight. In this graph, colonized mice have the highest percent of baseline weight (ie their weight has not changed), but it looks as though there is a larger effect in this group because that bar is the highest. Second, this graph is supposed to be a box and whisker plot, however it looks like a bar chart with error bars and many outliers because the first quartile hits the x axis.  These issues have inspired me to display this figure differently in a way that is easier to understand. 
+
+Also, I am not a fan of asterisk and bars across graphs to display significance because I think that they are distracting and lead the viewer to pay attention to the asterisk rather than the data itself. I have decided to perform pariwise t-tests to compare these groups of mice and then report the statistical test and p-value in a subtitle. 
+
+```{r echo=FALSE}
+
 #create strip chart with individual dots as RAG mice
 par(mar=c(6,6,4,4), xpd=T)
 stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5, sub="Pairwise t-test: Colonized vs. Control P<.05, Colonized vs. Cleared P<.05", font.sub=3)
@@ -193,8 +204,13 @@ pairwise.t.test(mousecfu$pBLweight, mousecfu$infection_status)
 
 
 ```
-
 ##Discussion
+In this project, I have replicated analysis of Jhansi's mouse colonization data.  I have performed statistical tests and created new graphics that display the data in a way that I think is easier to understand.  
+
+Jhansi and I discussed this project as well as the new plots that I created. We both thought it was interesting that I, as someone who had never before seen this data, thought different things should be emphasized than she did as the person who actually performed the experiments and collected the data. 
+
+Additionally, this project taught me that it is difficult to analyze someone elses dataset when you have no idea what variables mean and how it is organized.  Working on this has given me ideas on how to better anotate and store my own data so that it will be easier to analyze and to share with collaborators.   
+ 
 ##Sources
 1. [CDC.gov *C. diff*](http://www.cdc.gov/HAI/organisms/cdiff/Cdiff_infect.html)
 
