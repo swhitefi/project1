@@ -69,17 +69,31 @@ This figure was created in Prism and there are some issues with how the data is 
 ```{r}
 #create strip chart with individual dots as RAG mice
 par(mar=c(6,6,4,4), xpd=T)
-stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1)
+stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5)
 #adding WT mice
-stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", add=T)
+stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", cex=1.5, add=T)
 #adding median lines to plot
 #median control
-points(85.847797,2.992193, col="black", pch=10)
+points(85.847797,2.992193, col="black", pch="|", cex=2)
 #median colonized
-points(1.991561,101.269055, col="red", pch=15)
+points(101.269055,1.991561, col="black", pch="|", cex=2)
 #median cleared
-points(1.002984,91.666667, col="black", pch=10)
-
+points(91.666667,1.002984, col="grey", pch="|", cex=2)
+#adding IQR
+#making IQR coordinate points for each grou
+#control IQR 
+points( 84.514663, 2.992193, col="black", pch= "l", cex=1)
+points(87.637788, 2.992193, col="black", pch="l", cex=1)
+controlqI
+#colonized IQR
+points( 98.974400, 1.991561, col="black", pch= "l", cex=1)
+points(104.097494, 1.991561, col="black", pch="l", cex=1)
+#cleared IQR vectors
+points( 89.629630, 1.002984, col="black", pch= "l", cex=1)
+points(92.307692, 1.002984, col="black", pch="l", cex=1)
+#adding lines to connect IQR
+#control line
+lines(controlqI~controlqII, type="l", col="grey")
 #adding legend
 
 legend("bottom", c("RAG","WT"), pch=1, col=c("green","blue"),horiz=T, xpd=T, bty="n", cex=1, inset=c(0,1))
