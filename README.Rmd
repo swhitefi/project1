@@ -69,7 +69,7 @@ This figure was created in Prism and there are some issues with how the data is 
 ```{r}
 #create strip chart with individual dots as RAG mice
 par(mar=c(6,6,4,4), xpd=T)
-stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5)
+stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5, sub="Colonized vs. Control p<.05, Colonized vs. Cleared p<.05", font.sub=3)
 #adding WT mice
 stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", cex=1.5, add=T)
 #adding median lines to plot
@@ -84,44 +84,28 @@ points(91.666667,1.002984, col="black", pch="|", cex=2)
 #control IQR 
 points( 84.514663, 2.992193, col="black", pch= "l", cex=1.5, lwd=2)
 points(87.637788, 2.992193, col="black", pch="l", cex=1.5)
-controlqI
 #colonized IQR
 points( 98.974400, 1.991561, col="black", pch= "l", cex=1.5, lwd=2)
 points(104.097494, 1.991561, col="black", pch="l", cex=1.5, lwd=2)
 #cleared IQR vectors
 points( 89.629630, 1.002984, col="black", pch= "l", cex=1.5, lwd=2)
 points(92.307692, 1.002984, col="black", pch="l", cex=1.5, lwd=2)
-#adding lines to connect IQR
-#control line
-lines(controlqI~controlqII, type="l", col="grey")
 #adding legend
 
 legend("bottom", c("RAG","WT"), pch=1, col=c("green","blue"),horiz=T, xpd=T, bty="n", cex=1, inset=c(0,1))
 
-
+#this is how I got the coordinates for above IQR and medians
 #writing function to find median mean and IQR of each pre VPI type
 summarystats<-function(x) {
  c( mean=mean(x), quantile=quantile(x), median=median(x), sd=sd(x))
 }
 sumstatsweight<-tapply(mousecfu$pBLweight, mousecfu$infection_status, summarystats)
 sumstatsweight  
-#adding median lines to plot
-#median control
-points(85.847797,2.992193)
-#median colonized
-points(1.991561, 101.269055)
-#median cleared
-points(1.002984, 91.666667)
 
-points(84.51,87.63)
-qcolonized<-points(98.97, 104.09)
-qcleared<-points(89.62,92.30)
+#do pairwise t tests comparing naive vs cleared vs colonized
+pairwise.t.test(mousecfu$pBLweight, mousecfu$infection_status)
+#add significance to strip chart
 
-
-
-#do t tests comparing naive vs cleared
-#do t test comparing colonized and cleared
-#do t test comparing naive and colonized
 
 
 ```
