@@ -69,7 +69,7 @@ This figure was created in Prism and there are some issues with how the data is 
 ```{r}
 #create strip chart with individual dots as RAG mice
 par(mar=c(6,6,4,4), xpd=T)
-stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5, sub="Colonized vs. Control p<.05, Colonized vs. Cleared p<.05", font.sub=3)
+stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5, sub="Pairwise t-test: Colonized vs. Control P<.05, Colonized vs. Cleared P<.05", font.sub=3)
 #adding WT mice
 stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", cex=1.5, add=T)
 #adding median lines to plot
