@@ -44,7 +44,7 @@ Jhansi looked at the effect of the adaptive immune system on *C. diff* infection
 
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information.
 
-###Example 1: CFU by Genotype Data 
+###Example 1: Initial Excel Dataset 
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
 ```{r echo=FALSE}
 echo=FALSE
@@ -209,7 +209,7 @@ In this project, I have replicated analysis of Jhansi's mouse colonization data.
 
 Jhansi and I discussed this project as well as the new plots that I created. We both thought it was interesting that I, as someone who had never before seen this data, thought different things should be emphasized than she did as the person who actually performed the experiments and collected the data. 
 
-Additionally, this project taught me that it is difficult to analyze someone elses dataset when you have no idea what variables mean and how it is organized.  Working on this has given me ideas on how to better anotate and store my own data so that it will be easier to analyze and to share with collaborators.   
+Additionally, this project taught me that it is difficult to analyze someone elses dataset when you have no idea what variables mean and how it is organized.  Working on this has given me ideas on how to better anotate and store (such as keeping variables in long format vs wide format) my own data so that it will be easier to analyze and to share with collaborators.   
  
 ##Sources
 1. [CDC.gov *C. diff*](http://www.cdc.gov/HAI/organisms/cdiff/Cdiff_infect.html)
