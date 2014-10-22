@@ -1,3 +1,6 @@
+---
+output: pdf_document
+---
 output: html_document
 ---
 Project 1
