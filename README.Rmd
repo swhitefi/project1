@@ -57,12 +57,95 @@ The purpose of figure 8 is to demonstrate that adaptive immunity does not play a
 
 I think that the data could be expressed better as individual mice since the
 numbers are small.  Additionally separate symbols for mock infection and actual infection, and separate colors for each mouse genotype will allow easier and more clear interpretation of these data.
-```{r}
-#create new dataframe for the mean cfu per cage on each day
 
-#create variable with mean cfu day1
-#create variable for SEM for error bars
-#create bar chart displaying dpi vs cfu with a line for each cage
+Additionally, a chi-square test could answer the question of weather clearance of infection depends on adaptive immunity, and strengthen the argument that it does not. 
+
+```{r}
+#reshape data so a new variable called day takes on the value 1,4,7,16,22,31,40 for each mouse
+#add each wide variable day to a new variable called cfu corresponding with each day
+reshapecfu<-reshape(mousecfu, varying=c("CFUDay1",  "CFUDay4",	"CFUDay7",	"CFUDay10",	"CFUDay16",	"CFUDay22",	"CFUDay31",	"CFUDay40"), v.names="CFU", timevar="Day", times=c(1, 4, 7, 10, 16, 22, 31, 40), new.row.names=1:10000, direction="long")
+reshapecfu
+#sorting by day
+attach(reshapecfu)
+sortedreshapecfu<-reshapecfu[order(Day),]
+detach(reshapecfu)
+sortedreshapecfu       
+#create line graph of all mice by genotype
+plot(sortedreshapecfu$CFU~sortedreshapecfu$Day, type="p")
+points(40,3.26e+05, pch=6, col="red")
+
+plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=15, log="y", main="RAG and WT 630 Colonization Over Time", xlab="Day", ylab="Titer(630CFU/gram feces)")
+#adding WT mice
+points(sortedreshapecfu[sortedreshapecfu$genotype=="WT","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="WT","Day"], type="p", col="blue", pch=1)
+#adding control
+lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black")
+#connecting the mice
+#1
+lines(sortedreshapecfu[sortedreshapecfu$id=="1","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="1", "Day"], type="l", col="grey")
+#2
+lines(sortedreshapecfu[sortedreshapecfu$id=="2","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="2", "Day"], type="l", col="grey")
+#3
+lines(sortedreshapecfu[sortedreshapecfu$id=="3","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="3", "Day"], type="l", col="grey")
+#4
+lines(sortedreshapecfu[sortedreshapecfu$id=="4","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="4", "Day"], type="l", col="grey")
+#5
+lines(sortedreshapecfu[sortedreshapecfu$id=="5","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="5", "Day"], type="l", col="grey")
+#6
+lines(sortedreshapecfu[sortedreshapecfu$id=="6","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="6", "Day"], type="l", col="grey")
+#7
+lines(sortedreshapecfu[sortedreshapecfu$id=="7","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="7", "Day"], type="l", col="grey")
+#8
+lines(sortedreshapecfu[sortedreshapecfu$id=="8","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="8", "Day"], type="l", col="grey")
+#9
+lines(sortedreshapecfu[sortedreshapecfu$id=="9","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="9", "Day"], type="l", col="grey")
+#10
+lines(sortedreshapecfu[sortedreshapecfu$id=="10","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="10", "Day"], type="l", col="grey")
+#11
+lines(sortedreshapecfu[sortedreshapecfu$id=="11","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="11", "Day"], type="l", col="grey")
+#12
+lines(sortedreshapecfu[sortedreshapecfu$id=="12","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="12", "Day"], type="l", col="grey")
+#13
+lines(sortedreshapecfu[sortedreshapecfu$id=="13","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="13", "Day"], type="l", col="grey")
+#14
+lines(sortedreshapecfu[sortedreshapecfu$id=="14","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="14", "Day"], type="l", col="grey")
+#15
+lines(sortedreshapecfu[sortedreshapecfu$id=="15","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="15", "Day"], type="l", col="grey")
+#16
+lines(sortedreshapecfu[sortedreshapecfu$id=="16","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="16", "Day"], type="l", col="grey")
+#17
+lines(sortedreshapecfu[sortedreshapecfu$id=="17","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="17", "Day"], type="l", col="grey")
+#18
+lines(sortedreshapecfu[sortedreshapecfu$id=="18","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="18", "Day"], type="l", col="grey")
+#19
+lines(sortedreshapecfu[sortedreshapecfu$id=="19","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="19", "Day"], type="l", col="grey")
+#20
+lines(sortedreshapecfu[sortedreshapecfu$id=="20","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="20", "Day"], type="l", col="grey")
+#21
+lines(sortedreshapecfu[sortedreshapecfu$id=="21","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="21", "Day"], type="l", col="grey")
+#22
+lines(sortedreshapecfu[sortedreshapecfu$id=="22","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="22", "Day"], type="l", col="grey")
+#23
+lines(sortedreshapecfu[sortedreshapecfu$id=="23","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="23", "Day"], type="l", col="grey")
+#24
+lines(sortedreshapecfu[sortedreshapecfu$id=="24","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="24", "Day"], type="l", col="grey")
+#25
+lines(sortedreshapecfu[sortedreshapecfu$id=="25","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="25", "Day"], type="l", col="grey")
+#26
+lines(sortedreshapecfu[sortedreshapecfu$id=="26","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="26", "Day"], type="l", col="grey")
+#27
+lines(sortedreshapecfu[sortedreshapecfu$id=="27","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="27", "Day"], type="l", col="grey")
+#28
+lines(sortedreshapecfu[sortedreshapecfu$id=="28","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="28", "Day"], type="l", col="grey")
+#29
+lines(sortedreshapecfu[sortedreshapecfu$id=="29","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="29", "Day"], type="l", col="grey")
+#30
+lines(sortedreshapecfu[sortedreshapecfu$id=="30","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="30", "Day"], type="l", col="grey")
+#31
+lines(sortedreshapecfu[sortedreshapecfu$id=="31","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="31", "Day"], type="l", col="grey")
+#32
+lines(sortedreshapecfu[sortedreshapecfu$id=="32","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="32", "Day"], type="l", col="grey")
+legend()
+#chi square test for infection outcome by genotype
 ```
 ###Figure 9 discussion and data visualization improvements
 In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previous 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
