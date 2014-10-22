@@ -64,21 +64,17 @@ Additionally, a chi-square test could answer the question of weather clearance o
 #reshape data so a new variable called day takes on the value 1,4,7,16,22,31,40 for each mouse
 #add each wide variable day to a new variable called cfu corresponding with each day
 reshapecfu<-reshape(mousecfu, varying=c("CFUDay1",  "CFUDay4",	"CFUDay7",	"CFUDay10",	"CFUDay16",	"CFUDay22",	"CFUDay31",	"CFUDay40"), v.names="CFU", timevar="Day", times=c(1, 4, 7, 10, 16, 22, 31, 40), new.row.names=1:10000, direction="long")
-reshapecfu
 #sorting by day
 attach(reshapecfu)
 sortedreshapecfu<-reshapecfu[order(Day),]
-detach(reshapecfu)
-sortedreshapecfu       
+detach(reshapecfu)      
 #create line graph of all mice by genotype
-plot(sortedreshapecfu$CFU~sortedreshapecfu$Day, type="p")
-points(40,3.26e+05, pch=6, col="red")
-
-plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=15, log="y", main="RAG and WT 630 Colonization Over Time", xlab="Day", ylab="Titer(630CFU/gram feces)")
+par(mar=c(6,6,4,4), xpd=T)
+plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=15, log="y", main="RAG and WT 630 CFU/g Feces Over Time", xlab="Day", ylab="", las=1, cex=1, )
 #adding WT mice
 points(sortedreshapecfu[sortedreshapecfu$genotype=="WT","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="WT","Day"], type="p", col="blue", pch=1)
 #adding control
-lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black")
+lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black", lwd=3)
 #connecting the mice
 #1
 lines(sortedreshapecfu[sortedreshapecfu$id=="1","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="1", "Day"], type="l", col="grey")
@@ -144,7 +140,8 @@ lines(sortedreshapecfu[sortedreshapecfu$id=="30","CFU"]~sortedreshapecfu[sortedr
 lines(sortedreshapecfu[sortedreshapecfu$id=="31","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="31", "Day"], type="l", col="grey")
 #32
 lines(sortedreshapecfu[sortedreshapecfu$id=="32","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="32", "Day"], type="l", col="grey")
-legend()
+#adding legend
+legend("topright", c("RAG","WT"), pch=c(15,1), col=c("green","blue"), cex=1, bty="n")
 #chi square test for infection outcome by genotype
 ```
 ###Figure 9 discussion and data visualization improvements
