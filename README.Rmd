@@ -52,10 +52,14 @@ summary(mousecfu)
 
 
 ```
-###Figure 8 replication
-figure 8 clearly demonstrates that adaptive immunity does not play a role in *C. diff* infection clearance, and that pre-colonization with a less virulent strain is protective against infection with a lethal strain. 
+###Figure 8 
+The purpose of figure 8 is to demonstrate that adaptive immunity does not play a role in *C. diff* infection clearance. This figure shows the CFU (mean +/- the SEM) for each cage of RAG or WT mice over time after infection with *C. diff* strain 630 or mock infection. There are 6 total cages, each cage has between 4 and 8 mice, and cages house either WT or RAG mice. For these reasons, I think that displaying the mean colonization by cage takes away from the interpretation of this data. Visually it looks as though colonization is dependent on cage effects, which takes away from the fact that this is actually an effect of variation in the outcome of infection vs. mock infection. 
+
+I think that the data could be expressed better as individual mice since the
+numbers are small.  Additionally separate symbols for mock infection and actual infection, and separate colors for each mouse genotype will allow easier and more clear interpretation of these data.
 ```{r}
 #create new dataframe for the mean cfu per cage on each day
+
 #create variable with mean cfu day1
 #create variable for SEM for error bars
 #create bar chart displaying dpi vs cfu with a line for each cage
