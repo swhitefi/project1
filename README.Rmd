@@ -48,7 +48,7 @@ Jhansi looked at the effect of the adaptive immune system on *C. diff* infection
 The data was stored in a large multi-sheet Excel document, so the first step was to generate usable dataframes with the pertinant information.
 
 ###Example 1: Initial Excel Dataset 
-![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
+![](/Users/shawnwhitefield/Desktop/r_class/Project01/Rag_longterm_datasheets.jpg)
 ```{r echo=FALSE}
 echo=FALSE
 #reading in cfu and weights datafile

@@ -1,8 +1,3 @@
----
-output: pdf_document
----
-output: html_document
----
 Project 1
 ========
 
@@ -48,11 +43,72 @@ The data was stored in a large multi-sheet Excel document, so the first step was
 
 ###Example 1: Initial Excel Dataset 
 ![](/Users/shawnwhitefield/Desktop/Rag_longterm_datasheets.jpg)
-```{r echo=FALSE}
-echo=FALSE
-#reading in cfu and weights datafile
-mousecfu<-read.table(file="cleaned-up_mouse_data.txt", header=T)
-summary(mousecfu)
+
+```
+##        ID             cage          sex     treatment genotype
+##  Min.   : 1.00   Min.   :1.00   female:11   630:18    RAG:15  
+##  1st Qu.: 8.75   1st Qu.:1.75   male  :21   c  :14    WT :17  
+##  Median :16.50   Median :3.00                                 
+##  Mean   :16.50   Mean   :3.12                                 
+##  3rd Qu.:24.25   3rd Qu.:5.00                                 
+##  Max.   :32.00   Max.   :6.00                                 
+##                                                               
+##  X630_infection_day      Day1           Day2           Day4     
+##  Min.   :16.2       Min.   :14.8   Min.   :13.6   Min.   :13.5  
+##  1st Qu.:18.4       1st Qu.:18.4   1st Qu.:18.2   1st Qu.:17.9  
+##  Median :19.3       Median :19.3   Median :19.6   Median :19.2  
+##  Mean   :19.8       Mean   :19.8   Mean   :19.8   Mean   :19.6  
+##  3rd Qu.:21.4       3rd Qu.:21.4   3rd Qu.:21.2   3rd Qu.:21.8  
+##  Max.   :24.0       Max.   :24.2   Max.   :24.3   Max.   :23.7  
+##                                                                 
+##       Day5           Day7           Day9          Day10     
+##  Min.   :13.1   Min.   :12.0   Min.   :16.1   Min.   :16.1  
+##  1st Qu.:17.8   1st Qu.:18.4   1st Qu.:18.7   1st Qu.:18.6  
+##  Median :19.5   Median :19.8   Median :19.9   Median :20.1  
+##  Mean   :19.5   Mean   :20.0   Mean   :20.2   Mean   :20.2  
+##  3rd Qu.:21.5   3rd Qu.:22.2   3rd Qu.:21.2   3rd Qu.:21.6  
+##  Max.   :23.9   Max.   :24.2   Max.   :27.5   Max.   :24.3  
+##                                NA's   :1      NA's   :1     
+##      Day14          Day16          Day22          Day31     
+##  Min.   :16.4   Min.   :16.3   Min.   :17.3   Min.   :18.4  
+##  1st Qu.:19.4   1st Qu.:19.3   1st Qu.:20.4   1st Qu.:20.3  
+##  Median :20.9   Median :21.0   Median :21.9   Median :22.4  
+##  Mean   :21.0   Mean   :20.9   Mean   :21.9   Mean   :22.1  
+##  3rd Qu.:22.9   3rd Qu.:22.5   3rd Qu.:23.6   3rd Qu.:23.7  
+##  Max.   :26.6   Max.   :25.0   Max.   :26.2   Max.   :26.5  
+##  NA's   :1      NA's   :1      NA's   :1      NA's   :1     
+##      Day32      IP_clinda_day_41 VPI_infection_day_42     Day43     
+##  Min.   :18.5   Min.   :18.7     Min.   :18.3         Min.   :16.0  
+##  1st Qu.:20.2   1st Qu.:20.4     1st Qu.:20.2         1st Qu.:19.9  
+##  Median :22.5   Median :23.0     Median :22.5         Median :22.6  
+##  Mean   :22.3   Mean   :22.4     Mean   :22.3         Mean   :21.9  
+##  3rd Qu.:23.9   3rd Qu.:24.5     3rd Qu.:24.0         3rd Qu.:23.8  
+##  Max.   :27.0   Max.   :26.8     Max.   :27.0         Max.   :26.7  
+##  NA's   :1      NA's   :1        NA's   :1            NA's   :1     
+##      Day44        pBLweight        CFUDay1            CFUDay4        
+##  Min.   :15.8   Min.   : 81.4   Min.   :       0   Min.   :1.00e+02  
+##  1st Qu.:19.6   1st Qu.: 85.4   1st Qu.:     100   1st Qu.:1.00e+02  
+##  Median :20.1   Median : 89.6   Median : 2900050   Median :5.00e+05  
+##  Mean   :20.4   Mean   : 92.0   Mean   :16418794   Mean   :1.94e+07  
+##  3rd Qu.:21.4   3rd Qu.: 98.7   3rd Qu.:23000000   3rd Qu.:3.50e+07  
+##  Max.   :24.5   Max.   :105.5   Max.   :85000000   Max.   :1.03e+08  
+##  NA's   :1      NA's   :1                                            
+##     CFUDay7            CFUDay10           CFUDay16          CFUDay22      
+##  Min.   :     100   Min.   :     100   Min.   :    100   Min.   :    100  
+##  1st Qu.:     100   1st Qu.:     100   1st Qu.:    100   1st Qu.:    100  
+##  Median :     100   Median :     100   Median :    100   Median :    100  
+##  Mean   : 6056309   Mean   : 1643169   Mean   : 825558   Mean   : 218784  
+##  3rd Qu.: 4425000   3rd Qu.:  220000   3rd Qu.: 295050   3rd Qu.:   5050  
+##  Max.   :56000000   Max.   :31000000   Max.   :9000000   Max.   :2800000  
+##                     NA's   :3          NA's   :1         NA's   :1        
+##     CFUDay31         CFUDay40        infection_status
+##  Min.   :   100   Min.   :    100   cleared  : 9     
+##  1st Qu.:   100   1st Qu.:    100   colonized: 8     
+##  Median :   100   Median :    100   control  :14     
+##  Mean   : 17558   Mean   : 165881   NA's     : 1     
+##  3rd Qu.:  4050   3rd Qu.: 101550                    
+##  Max.   :290000   Max.   :3200000                    
+##  NA's   :1        NA's   :1
 ```
 ###Figure 8. Discussion and Data Visualization Modifications
 The purpose of figure 8 is to demonstrate that adaptive immunity does not play a role in *C. diff* infection clearance. This figure shows the CFU (mean +/-SEM) for each cage of RAG or WT mice over time after infection with *C. diff* strain 630 or mock infection. There are 6 total cages, each cage has between 4 and 8 mice, and cages house either WT or RAG mice. 
@@ -64,94 +120,18 @@ numbers are small.  Additionally separate symbols for RAG vs WT genotype visuall
 
 Also, a chi-square test will provide a stronger argument that clearance of infection does not depend on adaptive immunity.  
 
-```{r echo=FALSE}
-#reshape data so a new variable called day takes on the value 1,4,7,16,22,31,40 for each mouse
-#add each wide variable day to a new variable called cfu corresponding with each day
-reshapecfu<-reshape(mousecfu, varying=c("CFUDay1",  "CFUDay4",  "CFUDay7",	"CFUDay10",	"CFUDay16",	"CFUDay22",	"CFUDay31",	"CFUDay40"), v.names="CFU", timevar="Day", times=c(1, 4, 7, 10, 16, 22, 31, 40), new.row.names=1:10000, direction="long")
-#sorting by day
-attach(reshapecfu)
-sortedreshapecfu<-reshapecfu[order(Day),]
-detach(reshapecfu)      
-#create line graph of all mice by genotype
-par(mar=c(6,6,4,4), xpd=T)
-plot(sortedreshapecfu[sortedreshapecfu$genotype=="RAG","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="RAG","Day"], type="p", col="green", pch=3, log="y", main="630 CFU/g Feces in RAG & WT Mice Over Time", xlab="Day", ylab="", las=1, cex=1, sub="ChiSquare RAG vs. WT Colonization Outcome p=.94")
-#adding WT mice
-points(sortedreshapecfu[sortedreshapecfu$genotype=="WT","CFU"]~sortedreshapecfu[sortedreshapecfu$genotype=="WT","Day"], type="p", col="blue", pch=1)
-#connecting the mice
-#1
-lines(sortedreshapecfu[sortedreshapecfu$id=="1","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="1", "Day"], type="l", col="grey")
-#2
-lines(sortedreshapecfu[sortedreshapecfu$id=="2","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="2", "Day"], type="l", col="grey")
-#3
-lines(sortedreshapecfu[sortedreshapecfu$id=="3","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="3", "Day"], type="l", col="grey")
-#4
-lines(sortedreshapecfu[sortedreshapecfu$id=="4","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="4", "Day"], type="l", col="grey")
-#5
-lines(sortedreshapecfu[sortedreshapecfu$id=="5","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="5", "Day"], type="l", col="grey")
-#6
-lines(sortedreshapecfu[sortedreshapecfu$id=="6","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="6", "Day"], type="l", col="grey")
-#7
-lines(sortedreshapecfu[sortedreshapecfu$id=="7","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="7", "Day"], type="l", col="grey")
-#8
-lines(sortedreshapecfu[sortedreshapecfu$id=="8","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="8", "Day"], type="l", col="grey")
-#9
-lines(sortedreshapecfu[sortedreshapecfu$id=="9","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="9", "Day"], type="l", col="grey")
-#10
-lines(sortedreshapecfu[sortedreshapecfu$id=="10","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="10", "Day"], type="l", col="grey")
-#11
-lines(sortedreshapecfu[sortedreshapecfu$id=="11","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="11", "Day"], type="l", col="grey")
-#12
-lines(sortedreshapecfu[sortedreshapecfu$id=="12","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="12", "Day"], type="l", col="grey")
-#13
-lines(sortedreshapecfu[sortedreshapecfu$id=="13","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="13", "Day"], type="l", col="grey")
-#14
-lines(sortedreshapecfu[sortedreshapecfu$id=="14","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="14", "Day"], type="l", col="grey")
-#15
-lines(sortedreshapecfu[sortedreshapecfu$id=="15","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="15", "Day"], type="l", col="grey")
-#16
-lines(sortedreshapecfu[sortedreshapecfu$id=="16","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="16", "Day"], type="l", col="grey")
-#17
-lines(sortedreshapecfu[sortedreshapecfu$id=="17","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="17", "Day"], type="l", col="grey")
-#18
-lines(sortedreshapecfu[sortedreshapecfu$id=="18","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="18", "Day"], type="l", col="grey")
-#19
-lines(sortedreshapecfu[sortedreshapecfu$id=="19","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="19", "Day"], type="l", col="grey")
-#20
-lines(sortedreshapecfu[sortedreshapecfu$id=="20","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="20", "Day"], type="l", col="grey")
-#21
-lines(sortedreshapecfu[sortedreshapecfu$id=="21","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="21", "Day"], type="l", col="grey")
-#22
-lines(sortedreshapecfu[sortedreshapecfu$id=="22","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="22", "Day"], type="l", col="grey")
-#23
-lines(sortedreshapecfu[sortedreshapecfu$id=="23","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="23", "Day"], type="l", col="grey")
-#24
-lines(sortedreshapecfu[sortedreshapecfu$id=="24","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="24", "Day"], type="l", col="grey")
-#25
-lines(sortedreshapecfu[sortedreshapecfu$id=="25","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="25", "Day"], type="l", col="grey")
-#26
-lines(sortedreshapecfu[sortedreshapecfu$id=="26","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="26", "Day"], type="l", col="grey")
-#27
-lines(sortedreshapecfu[sortedreshapecfu$id=="27","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="27", "Day"], type="l", col="grey")
-#28
-lines(sortedreshapecfu[sortedreshapecfu$id=="28","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="28", "Day"], type="l", col="grey")
-#29
-lines(sortedreshapecfu[sortedreshapecfu$id=="29","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="29", "Day"], type="l", col="grey")
-#30
-lines(sortedreshapecfu[sortedreshapecfu$id=="30","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="30", "Day"], type="l", col="grey")
-#31
-lines(sortedreshapecfu[sortedreshapecfu$id=="31","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="31", "Day"], type="l", col="grey")
-#32
-lines(sortedreshapecfu[sortedreshapecfu$id=="32","CFU"]~sortedreshapecfu[sortedreshapecfu$id=="32", "Day"], type="l", col="grey")
-#adding control
-lines(sortedreshapecfu[sortedreshapecfu$treatment=="c","CFU"]~sortedreshapecfu[sortedreshapecfu$treatment=="c","Day"], type="l", col="black", lwd=5)
-#adding legend
-legend("topright", c("RAG","WT", "Mock"), pch=c(3,1,15), col=c("green","blue", "black"), cex=1, bty="n")
-#chi square test for infection outcome by genotype
-#reading in compressed table for equal variable lengths
-mouseinf_geno<-read.table(file="geno_infstatus.txt", header=T)
-ragchisq<-chisq.test(mouseinf_geno$infection_status, mouseinf_geno$genotype)
-ragchisq
+![plot of chunk unnamed-chunk-2](./README_files/figure-html/unnamed-chunk-2.png) 
 
+```
+## Warning: Chi-squared approximation may be incorrect
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  mouseinf_geno$infection_status and mouseinf_geno$genotype
+## X-squared = 0.1075, df = 2, p-value = 0.9477
 ```
 ###Figure 9. Discussion and Data Visualization Modifications
 In figure 9, Jhansi grouped WT and RAG mice by their *C. diff* status at the time of VPI infection (naive, previously 630 colonized and cleared infection, 630 colonized), and plotted this against the percentage of baseline weight (a measure of mouse illness) post VPI infection. 
@@ -162,49 +142,39 @@ This figure was created in Prism and there are some issues with how the data is 
 
 Also, I am not a fan of asterisk and bars across graphs to display significance because I think that they are distracting and lead the viewer to pay attention to the asterisk rather than the data itself. I have decided to perform pariwise t-tests to compare these groups of mice and then report the statistical test and p-value in a subtitle. 
 
-```{r echo=FALSE}
+![plot of chunk unnamed-chunk-3](./README_files/figure-html/unnamed-chunk-3.png) 
 
-#create strip chart with individual dots as RAG mice
-par(mar=c(6,6,4,4), xpd=T)
-stripchart(mousecfu[mousecfu$genotype=="RAG", "pBLweight"]~mousecfu[mousecfu$genotype=="RAG","infection_status"], method ="jitter", vertical=F, pch=c(1), col="green", xlab="% Baseline Weight", main="Weight Change By Colonization Status at VPI Infection", las=1, cex=1.5, sub="Pairwise t-test: Colonized vs. Control P<.05, Colonized vs. Cleared P<.05", font.sub=3)
-#adding WT mice
-stripchart(mousecfu[mousecfu$genotype=="WT", "pBLweight"]~mousecfu[mousecfu$genotype=="WT","infection_status"], method ="jitter", vertical=F, pch=c(1), col="blue", cex=1.5, add=T)
-#adding median lines to plot
-#median control
-points(85.847797,2.992193, col="black", pch="|", cex=2)
-#median colonized
-points(101.269055,1.991561, col="black", pch="|", cex=2)
-#median cleared
-points(91.666667,1.002984, col="black", pch="|", cex=2)
-#adding IQR
-#making IQR coordinate points for each grou
-#control IQR 
-points( 84.514663, 2.992193, col="black", pch= "l", cex=1.5, lwd=2)
-points(87.637788, 2.992193, col="black", pch="l", cex=1.5)
-#colonized IQR
-points( 98.974400, 1.991561, col="black", pch= "l", cex=1.5, lwd=2)
-points(104.097494, 1.991561, col="black", pch="l", cex=1.5, lwd=2)
-#cleared IQR vectors
-points( 89.629630, 1.002984, col="black", pch= "l", cex=1.5, lwd=2)
-points(92.307692, 1.002984, col="black", pch="l", cex=1.5, lwd=2)
-#adding legend
+```
+## $cleared
+##          mean   quantile.0%  quantile.25%  quantile.50%  quantile.75% 
+##         91.32         84.33         89.63         91.67         92.31 
+## quantile.100%        median            sd 
+##         97.99         91.67          3.78 
+## 
+## $colonized
+##          mean   quantile.0%  quantile.25%  quantile.50%  quantile.75% 
+##        99.311        81.443        98.974       101.269       104.097 
+## quantile.100%        median            sd 
+##       105.291       101.269         7.673 
+## 
+## $control
+##          mean   quantile.0%  quantile.25%  quantile.50%  quantile.75% 
+##        88.172        82.927        84.515        85.848        87.638 
+## quantile.100%        median            sd 
+##       105.473        85.848         6.922
+```
 
-legend("bottom", c("RAG","WT"), pch=1, col=c("green","blue"),horiz=T, xpd=T, bty="n", cex=1, inset=c(0,1))
-
-#this is how I got the coordinates for above IQR and medians
-#writing function to find median mean and IQR of each pre VPI type
-summarystats<-function(x) {
- c( mean=mean(x), quantile=quantile(x), median=median(x), sd=sd(x))
-}
-sumstatsweight<-tapply(mousecfu$pBLweight, mousecfu$infection_status, summarystats)
-sumstatsweight  
-
-#do pairwise t tests comparing naive vs cleared vs colonized
-pairwise.t.test(mousecfu$pBLweight, mousecfu$infection_status)
-#add significance to strip chart
-
-
-
+```
+## 
+## 	Pairwise comparisons using t tests with pooled SD 
+## 
+## data:  mousecfu$pBLweight and mousecfu$infection_status 
+## 
+##           cleared colonized
+## colonized 0.0318  -        
+## control   0.2598  0.0015   
+## 
+## P value adjustment method: holm
 ```
 ##Discussion
 In this project, I have replicated analysis of Jhansi's mouse colonization data.  I have performed statistical tests and created new graphics that display the data in a way that I think is easier to understand.  
